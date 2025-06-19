@@ -31,7 +31,7 @@ client.on("ready", () => {
       const randomIndex = Math.floor(Math.random() * activities.length);
       const newActivity = activities[randomIndex];
 
-      client.user.setActivity(newActivity);
+      client.user.setAnodctivity(newActivity);
     }, 25_000);
 });
 
@@ -62,9 +62,6 @@ console.log("Bot is running!");
 client.on("messageCreate", async (message) => {
 
     if (!message?.author.bot) {
-        if (message.channel.nsfw) {
-            console.log("Nsfw!");
-        }
         // If replying to us.
             /*try {
                 if (message.reference.messageId != undefined) {
@@ -87,23 +84,27 @@ client.on("messageCreate", async (message) => {
             catch (err) {
                 console.log(err)
             }*/
-        
 
-        //const channel = await client.channels.cache.find(channel => channel.id === message.channelId)
+        // Check if message contains x.com or twitter.com and not any alternate links.
         if ((message.content.indexOf("x.com") !== -1 && message.content.indexOf("twitter.com")) && !containsAlternate(message.content)) {
-            var replacementLink = "fixupx.com"
+            var replacementLink = "fixupx.com" // Default replacement link
 
             console.log("Oh shit this is a shitty twitter link! Replacing it with a cool gay one :3")
-            const channel = await message.channel.fetch()
-            console.log(`${message.author.displayName} sent a message in #${channel.name}:`)
-            console.log(message.content);
+            const channel = await message.channel.fetch() // Grab the channel this message was sent in
+
+            // Log messages *with links* in case we crash.
+            //console.log(`${message.author.displayName} sent a message in #${channel.name}:`)
+            //console.log(message.content);
+
             try {
+                // Delete user's message
                 message.delete();
             }
             catch(err) {
                 console.log(err)
             }
 
+            // Alternate links for specific channels
             if (channel.name === "go-for-it") {
                 replacementLink = "girlcockx.com"
             }
@@ -112,10 +113,12 @@ client.on("messageCreate", async (message) => {
                 replacementLink = "stupidpenisx.com"
             }
 
+            // Create bot message contents
             const botMessage = `**${message.author}** posted:\n${message.content.replace("x.com", replacementLink)}`;
-            console.log(`Message sent:\n${botMessage}`);
+            //console.log(`Message sent:\n${botMessage}`);
 
             try {
+                // Send message as bot
                 message.channel.send({content: botMessage, allowedMentions: { parse: [] }});
             }
             catch(err) {
