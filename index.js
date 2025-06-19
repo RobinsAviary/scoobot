@@ -31,7 +31,7 @@ client.on("ready", () => {
       const randomIndex = Math.floor(Math.random() * activities.length);
       const newActivity = activities[randomIndex];
 
-      client.user.setAnodctivity(newActivity);
+      client.user.setActivity(newActivity);
     }, 25_000);
 });
 
