@@ -87,7 +87,7 @@ client.on("messageCreate", async (message) => {
 
         // Check if message contains x.com or twitter.com and not any alternate links.
         if ((message.content.indexOf("x.com") !== -1 && message.content.indexOf("twitter.com")) && !containsAlternate(message.content)) {
-            var replacementLink = "fixupx.com" // Default replacement link
+            var replacementLink = "vxtwitter.com" // Default replacement link
 
             console.log("Oh shit this is a shitty twitter link! Replacing it with a cool gay one :3")
             const channel = await message.channel.fetch() // Grab the channel this message was sent in
@@ -105,9 +105,9 @@ client.on("messageCreate", async (message) => {
             }
 
             // Alternate links for specific channels
-            if (channel.name === "go-for-it") {
-                replacementLink = "girlcockx.com"
-            }
+            /*if (channel.name === "go-for-it") {
+                replacementLink = "stupidpenisx.com"
+            }*/
 
             if (channel.name === "politics") {
                 replacementLink = "stupidpenisx.com"
