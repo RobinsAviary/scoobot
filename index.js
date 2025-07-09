@@ -86,7 +86,7 @@ client.on("messageCreate", async (message) => {
             }*/
 
         // Check if message contains x.com or twitter.com and not any alternate links.
-        if ((message.content.indexOf("x.com") !== -1 && message.content.indexOf("twitter.com")) && !containsAlternate(message.content)) {
+        if ((message.content.indexOf("//x.com") !== -1 && message.content.indexOf("//twitter.com")) && !containsAlternate("//" + message.content)) {
             var replacementLink = "vxtwitter.com" // Default replacement link
 
             console.log("Oh shit this is a shitty twitter link! Replacing it with a cool gay one :3")
@@ -114,7 +114,7 @@ client.on("messageCreate", async (message) => {
             }
 
             // Create bot message contents
-            const botMessage = `**${message.author}** posted:\n${message.content.replace("x.com", replacementLink)}`;
+            const botMessage = `**${message.author}** posted:\n${message.content.replace("//x.com", "//" + replacementLink)}`;
             //console.log(`Message sent:\n${botMessage}`);
 
             try {
